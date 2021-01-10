@@ -83,5 +83,35 @@ public class UserController {
     return userRepository.save(user);
   }
 
+  /**
+   * Delete user user.
+   *
+   * @param userId by id
+   */
+  @DeleteMapping("/users/{id}")
+  public void deleteUserById(@PathVariable(value = "id") Long userId) throws ResourceNotFoundException{
+    if(userRepository.findById(userId)!=null){
+      userRepository.deleteById(userId);
+    }else {
+      throw new ResourceNotFoundException("User not found on ::" + userId);
+    }
+  }
+
+  /**
+   * Update user user.
+   *
+   * @param user the user
+   * @return the user
+   */
+  @PutMapping("/users")
+  public User updateUserById(@Valid @RequestBody User user) throws ResourceNotFoundException{
+    if(userRepository.findById(user.getId()) == null){
+      throw new ResourceNotFoundException("User not found on ::" + user.getId());
+    }else {
+      return createUser(user);
+    }
+
+  }
+
    
 }

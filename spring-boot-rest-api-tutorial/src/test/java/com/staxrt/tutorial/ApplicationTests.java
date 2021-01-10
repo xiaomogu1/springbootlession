@@ -16,66 +16,80 @@ import org.springframework.web.client.HttpClientErrorException;
 @SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class ApplicationTests {
 
-	@Autowired
-	private TestRestTemplate restTemplate;
+    @Autowired
+    private TestRestTemplate restTemplate;
 
-	@LocalServerPort
-	private int port;
+    @LocalServerPort
+    private int port;
 
-	private String getRootUrl() {
-		return "http://localhost:" + port+"/api/v1";
-	}
+    private String getRootUrl() {
+        return "http://localhost:" + port + "/api/v1";
+    }
 
-	@Test
-	public void contextLoads() {
-	}
+    @Test
+    public void contextLoads() {
+    }
 
-	@Test
-	public void testGetAllUsers() {
-		HttpHeaders headers = new HttpHeaders();
-		HttpEntity<String> entity = new HttpEntity<String>(null, headers);
+    @Test
+    public void testGetAllUsers() {
+        HttpHeaders headers = new HttpHeaders();
+        HttpEntity<String> entity = new HttpEntity<String>(null, headers);
 
-		ResponseEntity<String> response = restTemplate.exchange(getRootUrl() + "/users",
-				HttpMethod.GET, entity, String.class);
+        ResponseEntity<String> response = restTemplate.exchange(getRootUrl() + "/users",
+                HttpMethod.GET, entity, String.class);
 
-		Assert.assertNotNull(response.getBody());
-	}
+        Assert.assertNotNull(response.getBody());
+    }
 
-	@Test
-	public void testGetUserById() {
-		User user = restTemplate.getForObject(getRootUrl() + "/users/1", User.class);
-		System.out.println(user.getFirstName());
-		Assert.assertNotNull(user);
-	}
+    @Test
+    public void testGetUserById() {
+        User user = restTemplate.getForObject(getRootUrl() + "/users/1", User.class);
+        System.out.println(user.getFirstName());
+        Assert.assertNotNull(user);
+    }
 
-	@Test
-	public void testCreateUser() {
-		User user = new User();
-		user.setEmail("admin@gmail.com");
-		user.setFirstName("admin");
-		user.setLastName("admin");
-		user.setCreatedBy("admin");
-		user.setUpdatedBy("admin");
+    @Test
+    public void testCreateUser() {
+        User user = new User();
+        user.setEmail("admin@gmail.com");
+        user.setFirstName("admin");
+        user.setLastName("admin");
+        user.setCreatedBy("admin");
+        user.setUpdatedBy("admin");
 
-		ResponseEntity<User> postResponse = restTemplate.postForEntity(getRootUrl() + "/users", user, User.class);
-		Assert.assertNotNull(postResponse);
-		Assert.assertNotNull(postResponse.getBody());
-		System.out.println(postResponse.toString());
-	}
+        ResponseEntity<User> postResponse = restTemplate.postForEntity(getRootUrl() + "/users", user, User.class);
+        Assert.assertNotNull(postResponse);
+        Assert.assertNotNull(postResponse.getBody());
+        System.out.println(postResponse.toString());
+    }
 
-	@Test
-	public void testUpdatePost() {
-		int id = 1;
-		User user = restTemplate.getForObject(getRootUrl() + "/users/" + id, User.class);
-		user.setFirstName("admin1");
-		user.setLastName("admin2");
+    @Test
+    public void testUpdatePost() {
+        int id = 1;
+        User user = restTemplate.getForObject(getRootUrl() + "/users/" + id, User.class);
+        user.setFirstName("admin1");
+        user.setLastName("admin2");
 
-		restTemplate.put(getRootUrl() + "/users/" + id, user);
+        restTemplate.put(getRootUrl() + "/users/" + id, user);
 
-		User updatedUser = restTemplate.getForObject(getRootUrl() + "/users/" + id, User.class);
-		Assert.assertNotNull(updatedUser);
-	}
+        User updatedUser = restTemplate.getForObject(getRootUrl() + "/users/" + id, User.class);
+        Assert.assertNotNull(updatedUser);
+    }
 
+    @Test
+    public void testDeleteUser() {
+        User user = restTemplate.getForObject(getRootUrl() + "/users/5", User.class);
+        System.out.println(user.getFirstName());
+        Assert.assertNotNull(user);
+        System.out.println("*********************");
+        restTemplate.delete(getRootUrl() + "/users/5");
+
+
+        User user1 = restTemplate.getForObject(getRootUrl() + "/users/5", User.class);
+        System.out.println(user1.getFirstName());
+        Assert.assertNotNull(user1);
+
+    }
 //	@Test
 //	public void testDeletePost() {
 //		int id = 2;
