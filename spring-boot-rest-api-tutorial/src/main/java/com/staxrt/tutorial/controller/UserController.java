@@ -23,6 +23,7 @@ package com.staxrt.tutorial.controller;
 import com.staxrt.tutorial.exception.ResourceNotFoundException;
 import com.staxrt.tutorial.model.User;
 import com.staxrt.tutorial.repository.UserRepository;
+import com.staxrt.tutorial.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -42,8 +43,11 @@ import java.util.Map;
 @RequestMapping("/api/v1")
 public class UserController {
 
+//  @Autowired
+//  private UserRepository userRepository;
+
   @Autowired
-  private UserRepository userRepository;
+  private UserService userService;
 
   /**
    * Get all users list.
@@ -52,7 +56,7 @@ public class UserController {
    */
   @GetMapping("/users")
   public List<User> getAllUsers() {
-    return userRepository.findAll();
+    return userService.findAll();
   }
 
   /**
@@ -66,7 +70,7 @@ public class UserController {
   public ResponseEntity<User> getUsersById(@PathVariable(value = "id") Long userId)
       throws ResourceNotFoundException {
     User user =
-        userRepository
+        userService
             .findById(userId)
             .orElseThrow(() -> new ResourceNotFoundException("User not found on :: " + userId));
     return ResponseEntity.ok().body(user);
@@ -80,7 +84,7 @@ public class UserController {
    */
   @PostMapping("/users")
   public User createUser(@Valid @RequestBody User user) {
-    return userRepository.save(user);
+    return userService.save(user);
   }
 
   /**
@@ -90,8 +94,8 @@ public class UserController {
    */
   @DeleteMapping("/users/{id}")
   public void deleteUserById(@PathVariable(value = "id") Long userId) throws ResourceNotFoundException{
-    if(userRepository.findById(userId)!=null){
-      userRepository.deleteById(userId);
+    if(userService.findById(userId)!=null){
+      userService.deleteById(userId);
     }else {
       throw new ResourceNotFoundException("User not found on ::" + userId);
     }
@@ -105,7 +109,7 @@ public class UserController {
    */
   @PutMapping("/users")
   public User updateUserById(@Valid @RequestBody User user) throws ResourceNotFoundException{
-    if(userRepository.findById(user.getId()) == null){
+    if(userService.findById(user.getId()) == null){
       throw new ResourceNotFoundException("User not found on ::" + user.getId());
     }else {
       return createUser(user);
