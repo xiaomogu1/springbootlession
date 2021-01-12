@@ -11,7 +11,7 @@
 ## Hibernate ddl auto (create, create-drop, validate, update)
 #spring.jpa.hibernate.ddl-auto = update
 
-
+#H2 https://stackoverflow.com/questions/48409005/what-is-the-jdbc-connection-string-for-h2-database
 spring:
     datasource:
         password: root
