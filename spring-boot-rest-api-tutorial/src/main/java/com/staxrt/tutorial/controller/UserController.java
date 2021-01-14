@@ -22,6 +22,8 @@ package com.staxrt.tutorial.controller;
 
 import com.staxrt.tutorial.exception.ResourceNotFoundException;
 import com.staxrt.tutorial.model.User;
+import com.staxrt.tutorial.model.UserReq;
+import com.staxrt.tutorial.model.UserResp;
 import com.staxrt.tutorial.repository.UserRepository;
 import com.staxrt.tutorial.service.UserService;
 
@@ -53,7 +55,7 @@ public class UserController {
    * @return the list
    */
   @GetMapping("/users")
-  public List<User> getAllUsers() {
+  public List<UserResp> getAllUsers() {
     return userService.findAll();
   }
 
@@ -65,10 +67,10 @@ public class UserController {
    * @throws ResourceNotFoundException the resource not found exception
    */
   @GetMapping("/users/{id}")
-  public ResponseEntity<User> getUsersById(@PathVariable(value = "id") Long userId)
+  public ResponseEntity<UserResp> getUsersById(@PathVariable(value = "id") Long userId)
       throws ResourceNotFoundException {
     
-	  User user = userService.findUserById(userId);
+	  UserResp user = userService.findUserById(userId);
        
     return ResponseEntity.ok().body(user);
   }
@@ -80,7 +82,7 @@ public class UserController {
    * @return the user
    */
   @PostMapping("/users")
-  public User createUser(@Valid @RequestBody User user) {
+  public UserResp createUser(@Valid @RequestBody User user) {
     return userService.save(user);
   }
 
@@ -93,17 +95,11 @@ public class UserController {
    * @throws ResourceNotFoundException the resource not found exception
    */
   @PutMapping("/users/{id}")
-  public ResponseEntity<User> updateUser(
-      @PathVariable(value = "id") Long userId, @Valid @RequestBody User userDetails)
+  public ResponseEntity<UserResp> updateUser(
+      @PathVariable(value = "id") Long userId, @Valid @RequestBody UserReq userReq)
       throws ResourceNotFoundException {
-
-    User user = userService.findUserById(userId);
-
-    user.setEmail(userDetails.getEmail());
-    user.setLastName(userDetails.getLastName());
-    user.setFirstName(userDetails.getFirstName());
-    user.setUpdatedAt(new Date());
-    final User updatedUser = userService.save(user);
+ 
+    final UserResp updatedUser = userService.update(userId, userReq);
     return ResponseEntity.ok(updatedUser);
   }
 
@@ -116,10 +112,8 @@ public class UserController {
    */
   @DeleteMapping("/user/{id}")
   public Map<String, Boolean> deleteUser(@PathVariable(value = "id") Long userId) throws Exception {
-    User user = userService.findUserById(userId);
-        
-
-    userService.delete(user);
+         
+    userService.delete(userId);
     Map<String, Boolean> response = new HashMap<>();
     response.put("deleted", Boolean.TRUE);
     return response;

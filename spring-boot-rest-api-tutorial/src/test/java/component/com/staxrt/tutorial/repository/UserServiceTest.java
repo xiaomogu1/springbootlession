@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.staxrt.tutorial.Application;
 import com.staxrt.tutorial.model.User;
+import com.staxrt.tutorial.model.UserResp;
 import com.staxrt.tutorial.repository.UserRepository;
 import com.staxrt.tutorial.service.UserService;
 
@@ -26,7 +27,7 @@ public class UserServiceTest {
 	@Test
 	public void findAll_passNoParams_returnSuccessUsers() {
 		
-		List<User> users = userService.findAll();
+		List<UserResp> users = userService.findAll();
 		users.forEach(user-> {
 			System.out.println(user.toString());
 		});
