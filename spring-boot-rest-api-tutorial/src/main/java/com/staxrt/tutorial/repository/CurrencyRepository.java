@@ -34,17 +34,17 @@ public class CurrencyRepository  {
 	private WebClient webClient;
 	
 	
-	public String get(String url) {
+	public CurrencyForeign get(String url) {
 		 System.out.println(webClient);
 		//https://exchangeratesapi.io/
-		String relults = webClient
+		 CurrencyForeign relults = webClient
 				  .get()
 				  .uri(URI.create(url))
 				  .retrieve()
 				  .onStatus(httpStatus -> httpStatus.value() != 200, 
 					        response -> response.bodyToMono(String.class)
 					        .map(s -> new Exception(s)))
-				  .bodyToMono(String.class)
+				  .bodyToMono(CurrencyForeign.class)
 				  .block();
  
 		return relults;

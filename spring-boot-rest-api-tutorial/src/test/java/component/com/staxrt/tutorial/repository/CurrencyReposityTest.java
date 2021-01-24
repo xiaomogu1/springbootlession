@@ -11,6 +11,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.staxrt.tutorial.Application;
+import com.staxrt.tutorial.repository.CurrencyForeign;
 import com.staxrt.tutorial.repository.CurrencyRepository;
 
 @RunWith(SpringRunner.class)
@@ -23,7 +24,7 @@ public class CurrencyReposityTest {
 	
 	@Test
 	public void testrepo() {
-		String result =  currencyRepository.get("https://api.exchangeratesapi.io/latest");
+		CurrencyForeign result =  currencyRepository.get("https://api.exchangeratesapi.io/latest");
 		System.out.println(result);
 	}
 
@@ -31,11 +32,11 @@ public class CurrencyReposityTest {
 	@Autowired
     ApplicationContext applicationContext;
 
-	@Test
-    public void printBeans() {
-		Arrays.asList(applicationContext.getBeanDefinitionNames()).stream().forEach(x ->{
-	        System.out.println(x);
-
-		});
-    }
+//	@Test
+//    public void printBeans() {
+//		Arrays.asList(applicationContext.getBeanDefinitionNames()).stream().forEach(x ->{
+//	        System.out.println(x);
+//
+//		});
+//    }
 }

@@ -62,14 +62,21 @@
 			<groupId>io.projectreactor</groupId>
 			<artifactId>reactor-test</artifactId>
 		</dependency>
+		
+		
+		
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-web-reactive -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-webflux</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.4.200</version>
+			</dependency>
 		
-		
-	</dependencies>
+ 		</dependencies>
 
 	<build>
 		<plugins>

@@ -36,4 +36,10 @@ public class AppConfig {
 	    System.out.println("client "+webC);
 	    return webC;
 	}
+    
+    /*
+     * 
+     *  Urlconnection connetion = XXXX.OPEN();
+     * connetion.READ
+     */
 }

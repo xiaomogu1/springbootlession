@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CoverageSettings">
+    <option name="settingsRevision" value="2" />
+    <option name="instrumentationEnabled" value="true" />
+    <option name="additionalCoverageFiles" value="" />
+    <option name="dataPath" value="keycloak-springboot-microservice" />
+    <option name="hilightSourceBackground" value="true" />
+    <option name="hilightEvenCoveredSource" value="true" />
+  </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK" />
+</project>
