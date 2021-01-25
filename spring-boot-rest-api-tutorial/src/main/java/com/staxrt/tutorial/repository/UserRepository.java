@@ -5,6 +5,7 @@ import com.staxrt.tutorial.model.User;
 import org.springframework.context.annotation.Profile;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.test.context.ActiveProfiles;
 
 /**
  * The interface User repository.
@@ -12,5 +13,5 @@ import org.springframework.stereotype.Repository;
  * @author Givantha Kalansuriya
  */
 @Repository
-//@ActiveProfiles("dev")
+@ActiveProfiles("test")
 public interface UserRepository extends JpaRepository<User, Long> {}
