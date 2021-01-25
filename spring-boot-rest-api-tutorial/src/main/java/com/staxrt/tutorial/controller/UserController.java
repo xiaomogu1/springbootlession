@@ -22,6 +22,7 @@ package com.staxrt.tutorial.controller;
 
 import com.staxrt.tutorial.exception.ResourceNotFoundException;
 import com.staxrt.tutorial.model.User;
+import com.staxrt.tutorial.model.UserFromUrl;
 import com.staxrt.tutorial.repository.UserRepository;
 import com.staxrt.tutorial.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,7 +56,7 @@ public class UserController {
    * @return the list
    */
   @GetMapping("/users")
-  public List<User> getAllUsers() {
+  public List<UserFromUrl> getAllUsers() {
     return userService.findAll();
   }
 
@@ -67,12 +68,11 @@ public class UserController {
    * @throws ResourceNotFoundException the resource not found exception
    */
   @GetMapping("/users/{id}")
-  public ResponseEntity<User> getUsersById(@PathVariable(value = "id") Long userId)
+  public ResponseEntity<UserFromUrl> getUsersById(@PathVariable(value = "id") Long userId)
       throws ResourceNotFoundException {
-    User user =
+    UserFromUrl user =
         userService
-            .findById(userId)
-            .orElseThrow(() -> new ResourceNotFoundException("User not found on :: " + userId));
+            .findById(userId);
     return ResponseEntity.ok().body(user);
   }
 
@@ -83,7 +83,7 @@ public class UserController {
    * @return the user
    */
   @PostMapping("/users")
-  public User createUser(@Valid @RequestBody User user) {
+  public UserFromUrl createUser(@Valid @RequestBody User user) {
     return userService.save(user);
   }
 
@@ -108,7 +108,7 @@ public class UserController {
    * @return the user
    */
   @PutMapping("/users")
-  public User updateUserById(@Valid @RequestBody User user) throws ResourceNotFoundException{
+  public UserFromUrl updateUserById(@Valid @RequestBody User user) throws ResourceNotFoundException{
     if(userService.findById(user.getId()) == null){
       throw new ResourceNotFoundException("User not found on ::" + user.getId());
     }else {
