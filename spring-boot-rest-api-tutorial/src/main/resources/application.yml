@@ -23,3 +23,9 @@ spring:
                dialect: org.hibernate.dialect.MySQL8Dialect
         hibernate:
            ddl-auto: update        
+           
+JMS:
+  BROKER:
+    URL: tcp://localhost:61616
+  TOPIC:
+    NAME:IN_TOPIC

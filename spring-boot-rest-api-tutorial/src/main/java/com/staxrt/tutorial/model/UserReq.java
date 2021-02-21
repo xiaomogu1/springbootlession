@@ -22,6 +22,9 @@ package com.staxrt.tutorial.model;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+
 /**
  * The type User.
  *
@@ -32,13 +35,16 @@ import java.util.Date;
 
      private long id;
 
+     @NotBlank
      private String firstName;
 
-     
+     @NotEmpty
      private String lastName;
 
+     
      private String email;
 
+     
      private Date createdAt;
 
      private String createdBy;

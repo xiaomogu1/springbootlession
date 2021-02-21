@@ -99,6 +99,8 @@ public class UserController {
       @PathVariable(value = "id") Long userId, @Valid @RequestBody UserReq userReq)
       throws ResourceNotFoundException {
  
+	  
+	  
     final UserResp updatedUser = userService.update(userId, userReq);
     return ResponseEntity.ok(updatedUser);
   }
