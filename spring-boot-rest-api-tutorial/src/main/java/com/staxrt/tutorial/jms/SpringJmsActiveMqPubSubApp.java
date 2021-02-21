@@ -5,7 +5,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class SpringJmsActiveMqPubSubApp {
 	
 	public static void main(String[] args) {
-		
+		// https://www.devglan.com/spring-boot/spring-boot-jms-activemq-example (another possible example)
 		
 		//https://hub.docker.com/r/rmohr/activemq
 		
