@@ -9,6 +9,8 @@ public class SpringJmsActiveMqPubSubApp {
 		
 		//https://hub.docker.com/r/rmohr/activemq
 		
+		// remove "classpath:EmbeddedActiveMQ.xml"
+		
 		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:EmbeddedActiveMQ.xml", "classpath:spring/activemq-jms-spring-context.xml");
 		
 		MessagePublisher messagePublisher = (MessagePublisher) applicationContext.getBean("messagePublisher");

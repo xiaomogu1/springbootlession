@@ -57,6 +57,8 @@ public class BlackBoxTestApplicationTests {
 		        validatableResponse.statusCode(200);
 		        List<User> users = response.as(List.class);
 		        
+		        
+		      
 		        System.out.println(users.toString());
 		         
 	}
